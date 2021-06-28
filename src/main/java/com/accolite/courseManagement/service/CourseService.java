@@ -6,15 +6,20 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
 
 import com.accolite.courseManagement.entities.CourseEntity;
 import com.accolite.courseManagement.entities.Creator;
+import com.accolite.courseManagement.entities.Participants;
 import com.accolite.courseManagement.entities.Skill;
 import com.accolite.courseManagement.exception.NoContentException;
 import com.accolite.courseManagement.models.Course;
+import com.accolite.courseManagement.models.Mail;
+//import com.accolite.courseManagement.models.Mail;
 import com.accolite.courseManagement.repositories.CourseEntityRepository;
 import com.accolite.courseManagement.repositories.CreatorRepository;
+import com.accolite.courseManagement.repositories.ParticipantRepository;
 import com.accolite.courseManagement.repositories.SkillRepository;
 
 @Service
@@ -24,16 +29,24 @@ public class CourseService {
 	private CourseEntityRepository courseEntityRepository;
 	
 	@Autowired
+	private ParticipantRepository participantRepository;
+	
+	@Autowired
 	private CreatorRepository creatorRepository;
 	
 	@Autowired
 	private SkillRepository skillRepository;
 	
+	@Autowired
+	private Mail myMail;
+	
 	public Course createCourse(Course course) {
 		CourseEntity courseEntity = this.courseEntityRepository.save(mapObjectToEntity(course));
 		return mapEntityToObject(courseEntity);
+//		Mail myMail = new Mail();
+//		myMail.sendSimpleMessage("kvkaustubhbagul1234@gmail.com", "test", "this is just a test");
 	}
-
+	
 	public CourseEntity mapObjectToEntity(Course course) {
 		CourseEntity entity = new CourseEntity();
 		
@@ -164,14 +177,16 @@ public class CourseService {
 		return mapEntityToObject(entity.get());
 	}
 	
-//	public Course getCourseBySkill(String skill) throws NoContentException {
-//
-//		CourseEntity entity = (CourseEntity) courseEntityRepository.getCourseBySkill(skill);
-//		if (entity == null) {
-//			throw new NoContentException(HttpStatus.NO_CONTENT);
-//		}
-//		return mapEntityToObject(entity);
-//	}
+	public void sendMail(Course course) {
+		List<Participants> participantList = participantRepository.findAll();
+		for(Participants participants: participantList) {
+			try {
+				myMail.sendSimpleMessage(participants.getEmail(), "New Course Added", course.getDescription());
+			} catch(MailException e){
+				System.err.println(e.getMessage());
+			}
+		}
+	}
 	
 	public Course updateCourse(Course course) {
 		CourseEntity courseEntity = this.courseEntityRepository.save(mapObjectToEntity(course));
