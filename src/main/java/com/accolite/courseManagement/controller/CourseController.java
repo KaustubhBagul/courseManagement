@@ -63,7 +63,6 @@ public class CourseController {
 		
 	@PostMapping("/")
 	public ResponseEntity<Course> createCourse(@RequestBody Course course){
-		courseService.sendMail(course);
 		return new ResponseEntity<>(courseService.createCourse(course), HttpStatus.OK);
 	}
 	
@@ -87,15 +86,10 @@ public class CourseController {
 		}
 	}
 	
-//	@GetMapping("/skill/{skill}")
-//	public ResponseEntity<Course> getCourseBySkill(@PathVariable("skill") String skill) {
-//		Course courseData = null;
-//		try {
-//			courseData = courseService.getCourseBySkill(skill);
-//		} catch (NoContentException e) {
-//			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//		}
-//
-//		return new ResponseEntity<>(courseData, HttpStatus.OK);
-//	}
+	@GetMapping("/skill/{skill}")
+	public ResponseEntity<List<Course>> getCourseBySkill(@PathVariable("skill") String skill) {
+		List<Course> courses = null;
+		courses = courseService.getCourseBySkill(skill);
+		return new ResponseEntity<>(courses, HttpStatus.OK);
+	}
 }

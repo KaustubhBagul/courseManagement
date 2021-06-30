@@ -42,9 +42,8 @@ public class CourseService {
 	
 	public Course createCourse(Course course) {
 		CourseEntity courseEntity = this.courseEntityRepository.save(mapObjectToEntity(course));
+		sendMail(course);
 		return mapEntityToObject(courseEntity);
-//		Mail myMail = new Mail();
-//		myMail.sendSimpleMessage("kvkaustubhbagul1234@gmail.com", "test", "this is just a test");
 	}
 	
 	public CourseEntity mapObjectToEntity(Course course) {
@@ -191,5 +190,14 @@ public class CourseService {
 	public Course updateCourse(Course course) {
 		CourseEntity courseEntity = this.courseEntityRepository.save(mapObjectToEntity(course));
 		return mapEntityToObject(courseEntity);
+	}
+	
+	public List<Course> getCourseBySkill(String skill) {
+		Skill skillEntity = this.skillRepository.findByName(skill);
+		List<CourseEntity> courseEntity = this.courseEntityRepository.findAllBySkill(skillEntity);
+		List<Course> list = new ArrayList<>();
+		for(CourseEntity course: courseEntity)
+			list.add(mapEntityToObject(course));
+		return list;
 	}
 }

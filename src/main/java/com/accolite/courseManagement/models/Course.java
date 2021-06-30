@@ -16,6 +16,23 @@ public class Course {
 	private List<Skill> skills;
 	private List<Creator> creator;
 	
+	public Course() {
+		
+	}
+	
+	public Course(Long id, String description, String prerequisite, String lastupdated, String feedback,
+			String location, List<Skill> skills, List<Creator> creator) {
+		super();
+		this.id = id;
+		this.description = description;
+		this.prerequisite = prerequisite;
+		this.lastupdated = lastupdated;
+		this.feedback = feedback;
+		this.location = location;
+		this.skills = skills;
+		this.creator = creator;
+	}
+	
 	public Long getId() {
 		return id;
 	}

@@ -31,6 +31,19 @@ public class CourseEntity {
 		
 	}
 	
+	public CourseEntity(Long id, String feedback, String description, String lastupdated, String location,
+			String prerequisite, List<Skill> skill, List<Creator> creator) {
+		super();
+		this.id = id;
+		this.feedback = feedback;
+		this.description = description;
+		this.lastupdated = lastupdated;
+		this.location = location;
+		this.prerequisite = prerequisite;
+		this.skill = skill;
+		this.creator = creator;
+	}
+
 	public Long getId() {
 		return id;
 	}
