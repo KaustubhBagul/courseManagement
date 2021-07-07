@@ -1,0 +1,65 @@
+<div style="margin: auto; width: 50%;">
+    <h1 style="padding: 1%;">Update Course</h1>
+    <form (ngSubmit) = "onSubmit()">
+        <div class="form-group" >
+            <label>Course Title</label>
+            <input class="form-control" id="title" name="title" type="text"
+            [(ngModel)] = "course.title">
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <input class="form-control" id="description" name="description" type="text"
+            [(ngModel)] = "course.description">
+        </div>
+        <div class="form-group">
+            <label>Prereuisite</label>
+            <input class="form-control" id="prerequisite" name="prerequisite" type="text"
+            [(ngModel)] = "course.prerequisite">
+        </div>
+        <div class="form-group">
+            <label>Last Updated</label>
+            <input class="form-control" id="lastupdated" name="lastupdated" type="text"
+            [(ngModel)] = "course.lastupdated">
+        </div>
+        <div class="form-group">
+            <label>Feedback</label>
+            <input class="form-control" id="feedback" name="feedback" type="text"
+            [(ngModel)] = "course.feedback">
+        </div>
+        <div class="form-group">
+            <label>Location</label>
+            <input class="form-control" id="location" name="location" type="text"
+            [(ngModel)] = "course.location">
+        </div>
+        
+        <div class="form-group">
+            <label>Skills</label>
+            <div class="input-group mb-3" *ngFor="let courseSkill of courseSkills">
+                <input class="form-control" id="skill" name="skill" type="text"
+                    [value]="courseSkill.name" disabled>
+                <div class="input-group-append">
+                    <input class="btn btn-outline-danger" type="button" 
+                        (click)="deleteSkill(courseSkill.id, courseSkill.name)" value="Delete Skill">
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <input class="form-control" id="skills" name="skills" type="text"
+                    [(ngModel)] = "skill">
+                <input class="btn btn-outline-success" type="button" (click)="addSkill()" value="Add Skill">
+            </div>
+
+            <label>Creator</label>
+            <div class="input-group mb-3" *ngFor="let courseCreator of courseCreators">
+                <input class="form-control" id="skills" name="skill" type="text"
+                    [value]="courseCreator.name" disabled>
+                <input class="btn btn-outline-danger" type="button" (click)="deleteCreator(courseCreator.id, courseCreator.name)" value="Delete Creator">
+            </div>
+            <div class="input-group mb-3">
+                <input class="form-control" id="creator" name="creator" type="text"
+                    [(ngModel)] = "creator">
+                <input class="btn btn-outline-success" type="button" (click)="addCreator()" value="Add Creator">
+            </div>
+        </div>
+        <button class="btn btn-success" type="submit">Submit</button>
+    </form>
+</div>

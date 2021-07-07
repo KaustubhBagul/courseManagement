@@ -1,0 +1,51 @@
+<h1 style="padding: 1%;">Course List</h1>
+<div style="width: 60%; margin:auto">
+  <form>
+    <div class="input-group mb-3">
+      <input #temp1 type="text" class="form-control" placeholder="Skill name" 
+        aria-describedby="basic-addon2">
+      <div class="input-group-append" name="skill">
+        <button class="btn btn-outline-success" type="button" (click)="searchSkill(temp1.value)">Search by Skill</button>
+      </div>
+    </div>
+  </form>
+
+  <form>
+    <div class="input-group mb-3">
+      <input #temp2 type="text" class="form-control" placeholder="Location Name" 
+        aria-describedby="basic-addon2">
+      <div class="input-group-append">
+        <button class="btn btn-outline-success" type="button" (click)="searchLocation(temp2.value)">Search by Location</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<table class="table table-striped" style="border: .5px solid lightslategrey">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>            
+            <th style="width: 25%;">Decription</th>
+            <th>Feedback</th>
+            <th>Location</th>
+            <th>Creator(s)</th>
+            <th style="width: 25%;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let course of courses">
+            <td>{{course.id}}</td>
+            <td>{{course.title}}</td>
+            <td>{{course.description}}</td>
+            <td>{{course.feedback}}</td>
+            <td>{{course.location}}</td>
+            <td><span *ngFor="let creator of course.creator">{{creator.name}} </span></td>
+            <td>
+                <button (click) = "updateCourse(course.id)" class="btn btn-success">Update</button>
+                <button (click) = "deleteCourse(course.id)" class="btn btn-danger" style="margin-left: 10px;">Delete</button>
+                <button (click) = "courseDetails(course.id)" class="btn btn-info" style="margin-left: 10px;">View Details</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

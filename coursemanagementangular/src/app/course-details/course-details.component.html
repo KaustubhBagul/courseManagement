@@ -1,0 +1,30 @@
+<h3 style="padding: 1%;">View Course Details</h3>
+
+<div style="font-size: larger;">
+    <div>
+        <label><b>Description: </b></label> {{course.description}}
+    </div>
+    <div>
+        <label><b>Prerequisite: </b></label> {{course.prerequisite}}
+    </div>
+    <div>
+        <label><b>Last Updated: </b></label> {{course.lastupdated}}
+    </div>
+    <div>
+        <label><b>Feedback: </b></label> {{course.feedback}}
+    </div>
+    <div>
+        <label><b>Location: </b></label> {{course.location}}
+    </div>
+    
+    <div>
+        <label><b>Skills: </b></label>
+        <span *ngFor="let skill of course.skills"> {{skill.name}}, </span>
+    </div>
+
+    <div>
+        <label><b>Creators: </b></label><span *ngFor="let creator of course.creator"> {{creator.name}},</span>
+    </div>
+</div>
+
+<a class="btn btn-outline-success" routerLink="/courseList">Back To Home</a>
