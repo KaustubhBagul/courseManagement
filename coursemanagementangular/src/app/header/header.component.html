@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+    <div class="container">
+        <ul class="navbar-nav">
+            <li class="navbar-item">
+                <a routerLink="courseList" class="nav-link" routerLinkActive='active'>Course List</a>
+            </li>
+            <li class="navbar-item">
+                <a *ngIf="isParticipantLoggedIn()" routerLink="participant/courses/{{username}}" 
+                    class="nav-link" routerLinkActive='active'>My Courses</a>
+            </li>
+            <li class="navbar-item">
+                <a *ngIf="isAdminLoggedIn()" routerLink="createCourse" 
+                    class="nav-link" routerLinkActive='active'>Create Course</a>
+            </li>
+            <li class="navbar-item">
+                <a *ngIf="isAdminLoggedIn()" routerLink="participants/manage" 
+                    class="nav-link" routerLinkActive='active'>Manage Participants</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav navbar-right">
+            <li>
+                <a *ngIf="isAdminLoggedIn()" routerLink="admin/register" 
+                    class="nav-link" routerLinkActive='active'>Add Admin</a>
+            </li>
+            <li>
+                <a *ngIf="!isAdminLoggedIn() && !isParticipantLoggedIn()" 
+                    routerLink="login" class="nav-link" routerLinkActive='active'>Login</a>
+            </li>
+            <li>
+                <a *ngIf="!isAdminLoggedIn() && !isParticipantLoggedIn()" 
+                    routerLink="participant/register" class="nav-link" routerLinkActive='active'>Signup</a>
+            </li>
+            <li>
+                <a *ngIf="isAdminLoggedIn() || isParticipantLoggedIn()" 
+                  (click)="logout()" class="nav-link">Logout</a>
+            </li>
+        </ul>
+    </div>
+  </nav>

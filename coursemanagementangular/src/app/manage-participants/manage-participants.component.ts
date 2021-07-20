@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Participant } from '../participant';
-import { ParticipantService } from '../participant.service';
+import { Participant } from '../models/participant';
+import { ParticipantService } from '../services/participant.service';
 
 @Component({
   selector: 'app-manage-participants',
@@ -23,13 +23,6 @@ export class ManageParticipantsComponent implements OnInit {
 
   refreshPage(){
     window.location.reload();
-  }
-
-  onCreate(){
-    this.participantService.createParticipant(this.participant).subscribe(data => {
-      console.log(data);
-      this.refreshPage();
-    }, error => console.log(error));
   }
 
   deleteParticipant(id: number){

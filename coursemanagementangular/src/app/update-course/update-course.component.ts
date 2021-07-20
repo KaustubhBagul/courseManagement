@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Course } from '../course';
-import { CourseService } from '../course.service';
-import { Creator } from '../creator';
-import { Skill } from '../skill';
+import { Course } from '../models/course';
+import { CourseService } from '../services/course.service';
+import { Creator } from '../models/creator';
+import { Skill } from '../models/skill';
 
 @Component({
   selector: 'app-update-course',

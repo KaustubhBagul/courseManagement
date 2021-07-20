@@ -42,9 +42,14 @@
             <td>{{course.location}}</td>
             <td><span *ngFor="let creator of course.creator">{{creator.name}} </span></td>
             <td>
-                <button (click) = "updateCourse(course.id)" class="btn btn-success">Update</button>
-                <button (click) = "deleteCourse(course.id)" class="btn btn-danger" style="margin-left: 10px;">Delete</button>
-                <button (click) = "courseDetails(course.id)" class="btn btn-info" style="margin-left: 10px;">View Details</button>
+                <button *ngIf="isAdminLoggedIn()" (click) = "updateCourse(course.id)" 
+                  class="btn btn-success">Update</button>
+                <button *ngIf="isAdminLoggedIn()" (click) = "deleteCourse(course.id)" 
+                  class="btn btn-danger" style="margin-left: 10px;">Delete</button>
+                <button (click) = "courseDetails(course.id)" class="btn btn-info"  
+                  style="margin-left: 10px;">View Details</button>
+                <button *ngIf="isParticipantLoggedIn()" (click) = "subscribeCourse(course.id)" 
+                  class="btn btn-success" style="margin-left: 10px;">Subscribe</button>
             </td>
         </tr>
     </tbody>

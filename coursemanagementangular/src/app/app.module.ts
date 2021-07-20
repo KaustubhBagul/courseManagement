@@ -8,10 +8,13 @@ import { AppComponent } from './app.component';
 import { CourseListComponent } from './course-list/course-list.component';
 import { CreateCourseComponent } from './create-course/create-course.component';
 import { UpdateCourseComponent } from './update-course/update-course.component';
-import { DeleteCourseComponent } from './delete-course/delete-course.component';
 import { CourseDetailsComponent } from './course-details/course-details.component';
 import { ManageParticipantsComponent } from './manage-participants/manage-participants.component';
-import { HomePageComponent } from './home-page/home-page.component';
+import { LoginComponent } from './login/login.component';
+import { HeaderComponent } from './header/header.component';
+import { RegisterComponent } from './register/register.component';
+import { ParticipantRegisterComponent } from './participant-register/participant-register.component';
+import { MyCoursesComponent } from './my-courses/my-courses.component';
 
 @NgModule({
   declarations: [
@@ -19,10 +22,13 @@ import { HomePageComponent } from './home-page/home-page.component';
     CourseListComponent,
     CreateCourseComponent,
     UpdateCourseComponent,
-    DeleteCourseComponent,
     CourseDetailsComponent,
     ManageParticipantsComponent,
-    HomePageComponent
+    LoginComponent,
+    HeaderComponent,
+    RegisterComponent,
+    ParticipantRegisterComponent,
+    MyCoursesComponent
   ],
   imports: [
     BrowserModule,

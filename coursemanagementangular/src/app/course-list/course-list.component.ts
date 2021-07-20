@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Course } from '../course';
-import { CourseService } from '../course.service';
+import { Course } from '../models/course';
+import { CourseService } from '../services/course.service';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../services/admin.service';
+import { ParticipantService } from '../services/participant.service';
 
 @Component({
   selector: 'app-course-list',
@@ -11,8 +13,11 @@ import { Router } from '@angular/router';
 export class CourseListComponent implements OnInit {
 
   courses: Course[] = [];
+  username: string | null = sessionStorage.getItem('username');
 
-  constructor(private courseService: CourseService, private router: Router) { }
+  constructor(private courseService: CourseService, private router: Router,
+    private adminService: AuthenticationService,
+    private participantService: ParticipantService) { }
 
   ngOnInit(): void {
     this.getCourses();
@@ -49,5 +54,18 @@ export class CourseListComponent implements OnInit {
     this.courseService.getCourseByLocation(location).subscribe(data => {
       this.courses = data;
     }, error => console.log(error));
+  }
+
+  subscribeCourse(courseId: number){
+    if(this.username != null){
+      this.participantService.subscribeCourse(this.username as String, courseId);
+    }
+  }
+
+  isAdminLoggedIn(){
+    return this.adminService.isAdminLoggedIn();
+  }
+  isParticipantLoggedIn(){
+    return this.participantService.isParticipantLoggedIn();
   }
 }

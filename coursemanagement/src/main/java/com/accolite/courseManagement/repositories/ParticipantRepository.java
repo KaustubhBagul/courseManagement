@@ -7,5 +7,7 @@ import com.accolite.courseManagement.entities.Participants;
 
 @Repository
 public interface ParticipantRepository extends JpaRepository<Participants, Long> {
-	
+
+	Participants findByEmail(String email);
+	Participants findByUsername(String username);
 }

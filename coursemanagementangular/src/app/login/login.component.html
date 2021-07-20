@@ -1,0 +1,29 @@
+<div class="container">
+  <form (ngSubmit) = "onAdminSubmit()" style="margin: 10px auto; width: 50%; border: 1px solid black; padding: 10px;">
+    <h2>Admin Login</h2>
+    <div class="form-group">
+      <label>Username</label>
+      <input class="form-control" type="text" name="username" [(ngModel)]="admin.username">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input class="form-control" type="password" name="password" [(ngModel)]="admin.password">
+    </div>
+    <button class="btn btn-success" type="submit">Login</button>
+  </form>
+</div>
+
+<div class="container">
+  <form (ngSubmit) = "onParticipantSubmit()" style="margin: 10px auto; width: 50%; border: 1px solid black; padding: 10px;">
+    <h2>Participant Login</h2>
+    <div class="form-group">
+      <label>Username</label>
+      <input class="form-control" type="text" name="username" [(ngModel)]="participant.username">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input class="form-control" type="password" name="password" [(ngModel)]="participant.password">
+    </div>
+    <button class="btn btn-success" type="submit">Login</button>
+  </form>
+</div>

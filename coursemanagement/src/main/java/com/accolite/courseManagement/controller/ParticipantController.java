@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.accolite.courseManagement.entities.CourseEntity;
 import com.accolite.courseManagement.entities.Participants;
 import com.accolite.courseManagement.repositories.ParticipantRepository;
 import com.accolite.courseManagement.service.ParticipantService;
@@ -34,19 +35,42 @@ public class ParticipantController {
 	public List<Participants> getAllParticipants(){
 		return this.participantRepository.findAll();
 	}
-	
-	@PostMapping()
-	public ResponseEntity<Object> addParticipant(@RequestBody Participants participant){
-		return new ResponseEntity<>(this.participantService.addParticipant(participant), HttpStatus.OK);
-	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<HttpStatus> deleteCourse(@PathVariable("id") Long id){
+	public ResponseEntity<HttpStatus> deleteParticipant(@PathVariable("id") Long id){
 		try {
 			this.participantRepository.deleteById(id);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch(Exception e){
 			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
 		}
+	}
+	
+	@PostMapping("/save")
+	public ResponseEntity<Integer> saveAdmin(@RequestBody Participants participant){
+		return new ResponseEntity<>(this.participantService.saveParticipant(participant), HttpStatus.OK);
+	}
+	
+	@PostMapping("/login")
+	public ResponseEntity<Integer> loginAdmin(@RequestBody Participants participant){
+		return new ResponseEntity<>(this.participantService.loginParticipant(participant), HttpStatus.OK);
+	}
+	
+	@GetMapping("/courses/{username}")
+	public List<CourseEntity> getMyCourses(@PathVariable("username") String username){
+		Participants participant = participantRepository.findByUsername(username);
+		return participant.getCourses();
+	}
+	
+	@GetMapping("/unsubscribe/{username}/{courseId}")
+	public Integer unsubscribeCourse(@PathVariable("username") String username, 
+			@PathVariable("courseId") Long courseId){
+		return this.participantService.unsubscribeCourse(username, courseId);
+	}
+	
+	@GetMapping("/subscribe/{username}/{courseId}")
+	public Integer subscribeCourse(@PathVariable("username") String username, 
+			@PathVariable("courseId") Long courseId){
+		return this.participantService.subscribeCourse(username, courseId);
 	}
 }
